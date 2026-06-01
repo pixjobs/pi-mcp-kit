@@ -1,7 +1,11 @@
 /**
  * Loads and validates MCP server configuration.
  *
- * Config file: ~/.pi/agent/extensions/pi-mcp-kit/mcp.json
+ * Config file location (co-located with extension):
+ *   - OMP: ${PI_CODING_AGENT_DIR}/extensions/pi-mcp-kit/mcp.json
+ *     (PI_CODING_AGENT_DIR is set by OMP to ~/.omp/agent)
+ *   - Pi:  ~/.pi/agent/extensions/pi-mcp-kit/mcp.json
+ *
  *
  * Format:
  * {
@@ -27,14 +31,15 @@ export interface MCPConfigError {
 
 /**
  * Load the MCP config file.
- * Returns { servers: [] } if the file doesn't exist.
- * Throws on malformed JSON.
+ * Uses PI_CODING_AGENT_DIR (set by OMP to ~/.omp/agent) to resolve the path.
  */
 export function loadMCPConfig(): MCPConfig | MCPConfigError {
-  const configPath = path.join(
-    process.env.HOME ?? process.env.USERPROFILE ?? ".",
-    ".pi/agent/extensions/pi-mcp-kit/mcp.json"
-  );
+  // Match getAgentDir() from pi-coding-agent: use PI_CODING_AGENT_DIR if set (OMP),
+  // otherwise fall back to ~/.pi/agent (Pi agent).
+  const agentDir = process.env.PI_CODING_AGENT_DIR
+    ? process.env.PI_CODING_AGENT_DIR
+    : path.join(process.env.HOME ?? process.env.USERPROFILE ?? ".", ".pi", "agent");
+  const configPath = path.join(agentDir, "extensions", "pi-mcp-kit", "mcp.json");
 
   if (!fs.existsSync(configPath)) {
     return { servers: [] };

@@ -2,3 +2,9 @@ node_modules/
 dist/
 *.tsbuildinfo
 coverage/
+
+# Sensitive — user-provided, never commit
+.env
+*.secret
+*.pem
+mcp.json

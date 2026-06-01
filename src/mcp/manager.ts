@@ -87,7 +87,7 @@ export class MCPManager {
           inputSchema: tool.inputSchema,
         };
         allTools.push(info);
-        this.toolToServer.set(tool.name, { server: name, name: tool.name });
+        this.toolToServer.set(fqn, { server: name, name: tool.name });
       }
     }
 
@@ -130,16 +130,12 @@ export class MCPManager {
    */
   getTools(): Omit<MCPToolInfo, "inputSchema">[] {
     const tools: Omit<MCPToolInfo, "inputSchema">[] = [];
-    for (const [name] of this.clients) {
-      for (const [, info] of this.toolToServer) {
-        if (info.server === name) {
-          tools.push({
-            server: name,
-            name: info.name,
-            fullName: this.buildFQN(name, info.name),
-          });
-        }
-      }
+    for (const [fqn, info] of this.toolToServer) {
+      tools.push({
+        server: info.server,
+        name: info.name,
+        fullName: fqn,
+      });
     }
     return tools;
   }
