@@ -10,18 +10,30 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
+    "lint": "eslint src/ --ext .ts",
+    "lint:fix": "eslint src/ --ext .ts --fix",
+    "format": "biome check --write src/",
     "test": "vitest run"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1"
   },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "^0.78.0",
+    "@biomejs/biome": "^2.4.16",
     "@earendil-works/pi-ai": "^0.78.0",
+    "@earendil-works/pi-coding-agent": "^0.78.0",
+    "@typescript-eslint/eslint-plugin": "^8.60.0",
+    "@typescript-eslint/parser": "^8.60.0",
+    "eslint": "^10.4.1",
     "typebox": "^1.1.38",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
   },
-  "keywords": ["pi", "extension", "mcp", "model-context-protocol"],
+  "keywords": [
+    "pi",
+    "extension",
+    "mcp",
+    "model-context-protocol"
+  ],
   "license": "Apache-2.0"
 }
