@@ -1,0 +1,27 @@
+{
+  "name": "pi-mcp-kit",
+  "version": "0.1.0",
+  "description": "MCP client extension for pi — give the agent external capabilities",
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.78.0",
+    "@earendil-works/pi-ai": "^0.78.0",
+    "typebox": "^1.1.38",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "keywords": ["pi", "extension", "mcp", "model-context-protocol"],
+  "license": "Apache-2.0"
+}
